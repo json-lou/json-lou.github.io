@@ -1,5 +1,3683 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Jayson's Portfolio</title><link href="https://json-lou.github.io/" rel="alternate"></link><link href="https://json-lou.github.io/feeds/all.atom.xml" rel="self"></link><id>https://json-lou.github.io/</id><updated>2019-05-31T00:00:00-04:00</updated><entry><title>Exploring Hacker News Posts</title><link href="https://json-lou.github.io/dq-02.html" rel="alternate"></link><published>2019-05-31T00:00:00-04:00</published><updated>2019-05-31T00:00:00-04:00</updated><author><name>Jayson Lou</name></author><id>tag:json-lou.github.io,2019-05-31:dq-02.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Jayson's Portfolio</title><link href="https://json-lou.github.io/" rel="alternate"></link><link href="https://json-lou.github.io/feeds/all.atom.xml" rel="self"></link><id>https://json-lou.github.io/</id><updated>2019-06-07T00:00:00-04:00</updated><entry><title>Exploring eBay Car Sales Data</title><link href="https://json-lou.github.io/dq-03.html" rel="alternate"></link><published>2019-06-07T00:00:00-04:00</published><updated>2019-06-07T00:00:00-04:00</updated><author><name>Jayson Lou</name></author><id>tag:json-lou.github.io,2019-06-07:dq-03.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area &gt; div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area &gt; div.highlight &gt; pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the &lt;head&gt; if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev &lt;Maniac@SoftwareManiacs.Org&gt;
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph &gt; img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell &gt; div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+&lt;/style&gt;
+&lt;style type="text/css"&gt;.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */&lt;/style&gt;
+&lt;style type="text/css"&gt;
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+&lt;/style&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h1 id="Exploring-eBay-Car-Sales-Data"&gt;Exploring eBay Car Sales Data&lt;a class="anchor-link" href="#Exploring-eBay-Car-Sales-Data"&gt;&amp;#182;&lt;/a&gt;&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Introduction"&gt;Introduction&lt;a class="anchor-link" href="#Introduction"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;In this project, we'll work with a dataset of used cards from &lt;strong&gt;eBay Kleinanzeigen&lt;/strong&gt;, a classifieds section of the German eBay website.&lt;/p&gt;
+&lt;p&gt;Some of the data provided is as follows:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dateCrawled&lt;/code&gt;: when this ad was first crawled&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;name&lt;/code&gt;: name of the car&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;seller&lt;/code&gt;: whether the seller is private or a dealer&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;offerType&lt;/code&gt;: the type of listing&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;price&lt;/code&gt;: the price on the ad to sell the car&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The aim of this project is to clean the data and analyze the included used car listings. We'll import the libraries we need and read the dataset into pandas.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pandas&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;pd&lt;/span&gt;
+
+&lt;span class="n"&gt;autos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;read_csv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;autos.csv&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;encoding&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Latin-1&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[1]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;dateCrawled&lt;/th&gt;
+      &lt;th&gt;name&lt;/th&gt;
+      &lt;th&gt;seller&lt;/th&gt;
+      &lt;th&gt;offerType&lt;/th&gt;
+      &lt;th&gt;price&lt;/th&gt;
+      &lt;th&gt;abtest&lt;/th&gt;
+      &lt;th&gt;vehicleType&lt;/th&gt;
+      &lt;th&gt;yearOfRegistration&lt;/th&gt;
+      &lt;th&gt;gearbox&lt;/th&gt;
+      &lt;th&gt;powerPS&lt;/th&gt;
+      &lt;th&gt;model&lt;/th&gt;
+      &lt;th&gt;odometer&lt;/th&gt;
+      &lt;th&gt;monthOfRegistration&lt;/th&gt;
+      &lt;th&gt;fuelType&lt;/th&gt;
+      &lt;th&gt;brand&lt;/th&gt;
+      &lt;th&gt;notRepairedDamage&lt;/th&gt;
+      &lt;th&gt;dateCreated&lt;/th&gt;
+      &lt;th&gt;nrOfPictures&lt;/th&gt;
+      &lt;th&gt;postalCode&lt;/th&gt;
+      &lt;th&gt;lastSeen&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;2016-03-26 17:47:46&lt;/td&gt;
+      &lt;td&gt;Peugeot_807_160_NAVTECH_ON_BOARD&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$5,000&lt;/td&gt;
+      &lt;td&gt;control&lt;/td&gt;
+      &lt;td&gt;bus&lt;/td&gt;
+      &lt;td&gt;2004&lt;/td&gt;
+      &lt;td&gt;manuell&lt;/td&gt;
+      &lt;td&gt;158&lt;/td&gt;
+      &lt;td&gt;andere&lt;/td&gt;
+      &lt;td&gt;150,000km&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;lpg&lt;/td&gt;
+      &lt;td&gt;peugeot&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-03-26 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;79588&lt;/td&gt;
+      &lt;td&gt;2016-04-06 06:45:54&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;2016-04-04 13:38:56&lt;/td&gt;
+      &lt;td&gt;BMW_740i_4_4_Liter_HAMANN_UMBAU_Mega_Optik&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$8,500&lt;/td&gt;
+      &lt;td&gt;control&lt;/td&gt;
+      &lt;td&gt;limousine&lt;/td&gt;
+      &lt;td&gt;1997&lt;/td&gt;
+      &lt;td&gt;automatik&lt;/td&gt;
+      &lt;td&gt;286&lt;/td&gt;
+      &lt;td&gt;7er&lt;/td&gt;
+      &lt;td&gt;150,000km&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;benzin&lt;/td&gt;
+      &lt;td&gt;bmw&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-04-04 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;71034&lt;/td&gt;
+      &lt;td&gt;2016-04-06 14:45:08&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;2016-03-26 18:57:24&lt;/td&gt;
+      &lt;td&gt;Volkswagen_Golf_1.6_United&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$8,990&lt;/td&gt;
+      &lt;td&gt;test&lt;/td&gt;
+      &lt;td&gt;limousine&lt;/td&gt;
+      &lt;td&gt;2009&lt;/td&gt;
+      &lt;td&gt;manuell&lt;/td&gt;
+      &lt;td&gt;102&lt;/td&gt;
+      &lt;td&gt;golf&lt;/td&gt;
+      &lt;td&gt;70,000km&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;benzin&lt;/td&gt;
+      &lt;td&gt;volkswagen&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-03-26 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;35394&lt;/td&gt;
+      &lt;td&gt;2016-04-06 20:15:37&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;2016-03-12 16:58:10&lt;/td&gt;
+      &lt;td&gt;Smart_smart_fortwo_coupe_softouch/F1/Klima/Pan...&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$4,350&lt;/td&gt;
+      &lt;td&gt;control&lt;/td&gt;
+      &lt;td&gt;kleinwagen&lt;/td&gt;
+      &lt;td&gt;2007&lt;/td&gt;
+      &lt;td&gt;automatik&lt;/td&gt;
+      &lt;td&gt;71&lt;/td&gt;
+      &lt;td&gt;fortwo&lt;/td&gt;
+      &lt;td&gt;70,000km&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;benzin&lt;/td&gt;
+      &lt;td&gt;smart&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-03-12 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;33729&lt;/td&gt;
+      &lt;td&gt;2016-03-15 03:16:28&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;2016-04-01 14:38:50&lt;/td&gt;
+      &lt;td&gt;Ford_Focus_1_6_Benzin_TÜV_neu_ist_sehr_gepfleg...&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$1,350&lt;/td&gt;
+      &lt;td&gt;test&lt;/td&gt;
+      &lt;td&gt;kombi&lt;/td&gt;
+      &lt;td&gt;2003&lt;/td&gt;
+      &lt;td&gt;manuell&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;focus&lt;/td&gt;
+      &lt;td&gt;150,000km&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;benzin&lt;/td&gt;
+      &lt;td&gt;ford&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-04-01 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;39218&lt;/td&gt;
+      &lt;td&gt;2016-04-01 14:38:50&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[2]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;info&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;&amp;lt;class &amp;#39;pandas.core.frame.DataFrame&amp;#39;&amp;gt;
+RangeIndex: 50000 entries, 0 to 49999
+Data columns (total 20 columns):
+dateCrawled            50000 non-null object
+name                   50000 non-null object
+seller                 50000 non-null object
+offerType              50000 non-null object
+price                  50000 non-null object
+abtest                 50000 non-null object
+vehicleType            44905 non-null object
+yearOfRegistration     50000 non-null int64
+gearbox                47320 non-null object
+powerPS                50000 non-null int64
+model                  47242 non-null object
+odometer               50000 non-null object
+monthOfRegistration    50000 non-null int64
+fuelType               45518 non-null object
+brand                  50000 non-null object
+notRepairedDamage      40171 non-null object
+dateCreated            50000 non-null object
+nrOfPictures           50000 non-null int64
+postalCode             50000 non-null int64
+lastSeen               50000 non-null object
+dtypes: int64(5), object(15)
+memory usage: 7.6+ MB
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;hr&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Cleaning-column-names"&gt;Cleaning column names&lt;a class="anchor-link" href="#Cleaning-column-names"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;From the above output, we can make the following observations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the dataset contains 20 columns, most of which are strings&lt;/li&gt;
+&lt;li&gt;some columns have null values, but none have more than ~20% null values&lt;/li&gt;
+&lt;li&gt;the column names use &lt;strong&gt;camelcase&lt;/strong&gt; instead of the preferred &lt;strong&gt;snakecase&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We'll convert the column names from camelcase to snakecase, and reword some of the column names based on the data dictionary to be more descriptive.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[3]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[3]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;Index([&amp;#39;dateCrawled&amp;#39;, &amp;#39;name&amp;#39;, &amp;#39;seller&amp;#39;, &amp;#39;offerType&amp;#39;, &amp;#39;price&amp;#39;, &amp;#39;abtest&amp;#39;,
+       &amp;#39;vehicleType&amp;#39;, &amp;#39;yearOfRegistration&amp;#39;, &amp;#39;gearbox&amp;#39;, &amp;#39;powerPS&amp;#39;, &amp;#39;model&amp;#39;,
+       &amp;#39;odometer&amp;#39;, &amp;#39;monthOfRegistration&amp;#39;, &amp;#39;fuelType&amp;#39;, &amp;#39;brand&amp;#39;,
+       &amp;#39;notRepairedDamage&amp;#39;, &amp;#39;dateCreated&amp;#39;, &amp;#39;nrOfPictures&amp;#39;, &amp;#39;postalCode&amp;#39;,
+       &amp;#39;lastSeen&amp;#39;],
+      dtype=&amp;#39;object&amp;#39;)&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We'll add the changes below.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[4]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;new_columns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;date_crawled&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;name&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;seller&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;offer_type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ab_test&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="s1"&gt;&amp;#39;vehicle_type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;registration_year&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;gearbox&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;power_ps&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;model&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="s1"&gt;&amp;#39;odometer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;registration_month&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;fuel_type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;brand&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="s1"&gt;&amp;#39;unrepaired_damage&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ad_created&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;num_photos&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;postal_code&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+       &lt;span class="s1"&gt;&amp;#39;last_seen&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;columns&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;new_columns&lt;/span&gt;
+&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[4]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;date_crawled&lt;/th&gt;
+      &lt;th&gt;name&lt;/th&gt;
+      &lt;th&gt;seller&lt;/th&gt;
+      &lt;th&gt;offer_type&lt;/th&gt;
+      &lt;th&gt;price&lt;/th&gt;
+      &lt;th&gt;ab_test&lt;/th&gt;
+      &lt;th&gt;vehicle_type&lt;/th&gt;
+      &lt;th&gt;registration_year&lt;/th&gt;
+      &lt;th&gt;gearbox&lt;/th&gt;
+      &lt;th&gt;power_ps&lt;/th&gt;
+      &lt;th&gt;model&lt;/th&gt;
+      &lt;th&gt;odometer&lt;/th&gt;
+      &lt;th&gt;registration_month&lt;/th&gt;
+      &lt;th&gt;fuel_type&lt;/th&gt;
+      &lt;th&gt;brand&lt;/th&gt;
+      &lt;th&gt;unrepaired_damage&lt;/th&gt;
+      &lt;th&gt;ad_created&lt;/th&gt;
+      &lt;th&gt;num_photos&lt;/th&gt;
+      &lt;th&gt;postal_code&lt;/th&gt;
+      &lt;th&gt;last_seen&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;2016-03-26 17:47:46&lt;/td&gt;
+      &lt;td&gt;Peugeot_807_160_NAVTECH_ON_BOARD&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$5,000&lt;/td&gt;
+      &lt;td&gt;control&lt;/td&gt;
+      &lt;td&gt;bus&lt;/td&gt;
+      &lt;td&gt;2004&lt;/td&gt;
+      &lt;td&gt;manuell&lt;/td&gt;
+      &lt;td&gt;158&lt;/td&gt;
+      &lt;td&gt;andere&lt;/td&gt;
+      &lt;td&gt;150,000km&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;lpg&lt;/td&gt;
+      &lt;td&gt;peugeot&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-03-26 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;79588&lt;/td&gt;
+      &lt;td&gt;2016-04-06 06:45:54&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;2016-04-04 13:38:56&lt;/td&gt;
+      &lt;td&gt;BMW_740i_4_4_Liter_HAMANN_UMBAU_Mega_Optik&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$8,500&lt;/td&gt;
+      &lt;td&gt;control&lt;/td&gt;
+      &lt;td&gt;limousine&lt;/td&gt;
+      &lt;td&gt;1997&lt;/td&gt;
+      &lt;td&gt;automatik&lt;/td&gt;
+      &lt;td&gt;286&lt;/td&gt;
+      &lt;td&gt;7er&lt;/td&gt;
+      &lt;td&gt;150,000km&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;benzin&lt;/td&gt;
+      &lt;td&gt;bmw&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-04-04 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;71034&lt;/td&gt;
+      &lt;td&gt;2016-04-06 14:45:08&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;2016-03-26 18:57:24&lt;/td&gt;
+      &lt;td&gt;Volkswagen_Golf_1.6_United&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$8,990&lt;/td&gt;
+      &lt;td&gt;test&lt;/td&gt;
+      &lt;td&gt;limousine&lt;/td&gt;
+      &lt;td&gt;2009&lt;/td&gt;
+      &lt;td&gt;manuell&lt;/td&gt;
+      &lt;td&gt;102&lt;/td&gt;
+      &lt;td&gt;golf&lt;/td&gt;
+      &lt;td&gt;70,000km&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;benzin&lt;/td&gt;
+      &lt;td&gt;volkswagen&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-03-26 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;35394&lt;/td&gt;
+      &lt;td&gt;2016-04-06 20:15:37&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;2016-03-12 16:58:10&lt;/td&gt;
+      &lt;td&gt;Smart_smart_fortwo_coupe_softouch/F1/Klima/Pan...&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$4,350&lt;/td&gt;
+      &lt;td&gt;control&lt;/td&gt;
+      &lt;td&gt;kleinwagen&lt;/td&gt;
+      &lt;td&gt;2007&lt;/td&gt;
+      &lt;td&gt;automatik&lt;/td&gt;
+      &lt;td&gt;71&lt;/td&gt;
+      &lt;td&gt;fortwo&lt;/td&gt;
+      &lt;td&gt;70,000km&lt;/td&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;benzin&lt;/td&gt;
+      &lt;td&gt;smart&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-03-12 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;33729&lt;/td&gt;
+      &lt;td&gt;2016-03-15 03:16:28&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;2016-04-01 14:38:50&lt;/td&gt;
+      &lt;td&gt;Ford_Focus_1_6_Benzin_TÜV_neu_ist_sehr_gepfleg...&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$1,350&lt;/td&gt;
+      &lt;td&gt;test&lt;/td&gt;
+      &lt;td&gt;kombi&lt;/td&gt;
+      &lt;td&gt;2003&lt;/td&gt;
+      &lt;td&gt;manuell&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;focus&lt;/td&gt;
+      &lt;td&gt;150,000km&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;benzin&lt;/td&gt;
+      &lt;td&gt;ford&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-04-01 00:00:00&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;39218&lt;/td&gt;
+      &lt;td&gt;2016-04-01 14:38:50&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;hr&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Initial-exploration-and-cleaning"&gt;Initial exploration and cleaning&lt;a class="anchor-link" href="#Initial-exploration-and-cleaning"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now, we'll do some basic data exploration to determine what other cleaning tasks need to be done. Initially, we will look for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;text columns where all or almost all values are the same&lt;/li&gt;
+&lt;li&gt;examples of numeric data stored as text which can be cleaned and coverted&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[5]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;describe&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;include&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;all&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[5]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;date_crawled&lt;/th&gt;
+      &lt;th&gt;name&lt;/th&gt;
+      &lt;th&gt;seller&lt;/th&gt;
+      &lt;th&gt;offer_type&lt;/th&gt;
+      &lt;th&gt;price&lt;/th&gt;
+      &lt;th&gt;ab_test&lt;/th&gt;
+      &lt;th&gt;vehicle_type&lt;/th&gt;
+      &lt;th&gt;registration_year&lt;/th&gt;
+      &lt;th&gt;gearbox&lt;/th&gt;
+      &lt;th&gt;power_ps&lt;/th&gt;
+      &lt;th&gt;model&lt;/th&gt;
+      &lt;th&gt;odometer&lt;/th&gt;
+      &lt;th&gt;registration_month&lt;/th&gt;
+      &lt;th&gt;fuel_type&lt;/th&gt;
+      &lt;th&gt;brand&lt;/th&gt;
+      &lt;th&gt;unrepaired_damage&lt;/th&gt;
+      &lt;th&gt;ad_created&lt;/th&gt;
+      &lt;th&gt;num_photos&lt;/th&gt;
+      &lt;th&gt;postal_code&lt;/th&gt;
+      &lt;th&gt;last_seen&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;count&lt;/th&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+      &lt;td&gt;44905&lt;/td&gt;
+      &lt;td&gt;50000.000000&lt;/td&gt;
+      &lt;td&gt;47320&lt;/td&gt;
+      &lt;td&gt;50000.000000&lt;/td&gt;
+      &lt;td&gt;47242&lt;/td&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+      &lt;td&gt;50000.000000&lt;/td&gt;
+      &lt;td&gt;45518&lt;/td&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+      &lt;td&gt;40171&lt;/td&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+      &lt;td&gt;50000.0&lt;/td&gt;
+      &lt;td&gt;50000.000000&lt;/td&gt;
+      &lt;td&gt;50000&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;unique&lt;/th&gt;
+      &lt;td&gt;48213&lt;/td&gt;
+      &lt;td&gt;38754&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;2357&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;245&lt;/td&gt;
+      &lt;td&gt;13&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;40&lt;/td&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;76&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;39481&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;top&lt;/th&gt;
+      &lt;td&gt;2016-03-09 11:54:38&lt;/td&gt;
+      &lt;td&gt;Ford_Fiesta&lt;/td&gt;
+      &lt;td&gt;privat&lt;/td&gt;
+      &lt;td&gt;Angebot&lt;/td&gt;
+      &lt;td&gt;$0&lt;/td&gt;
+      &lt;td&gt;test&lt;/td&gt;
+      &lt;td&gt;limousine&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;manuell&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;golf&lt;/td&gt;
+      &lt;td&gt;150,000km&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;benzin&lt;/td&gt;
+      &lt;td&gt;volkswagen&lt;/td&gt;
+      &lt;td&gt;nein&lt;/td&gt;
+      &lt;td&gt;2016-04-03 00:00:00&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;2016-04-07 06:17:27&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;freq&lt;/th&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;78&lt;/td&gt;
+      &lt;td&gt;49999&lt;/td&gt;
+      &lt;td&gt;49999&lt;/td&gt;
+      &lt;td&gt;1421&lt;/td&gt;
+      &lt;td&gt;25756&lt;/td&gt;
+      &lt;td&gt;12859&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;36993&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;4024&lt;/td&gt;
+      &lt;td&gt;32424&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;30107&lt;/td&gt;
+      &lt;td&gt;10687&lt;/td&gt;
+      &lt;td&gt;35232&lt;/td&gt;
+      &lt;td&gt;1946&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;8&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;mean&lt;/th&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;2005.073280&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;116.355920&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;5.723360&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;0.0&lt;/td&gt;
+      &lt;td&gt;50813.627300&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;std&lt;/th&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;105.712813&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;209.216627&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;3.711984&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;0.0&lt;/td&gt;
+      &lt;td&gt;25779.747957&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;min&lt;/th&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;1000.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;0.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;0.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;0.0&lt;/td&gt;
+      &lt;td&gt;1067.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;25%&lt;/th&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;1999.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;70.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;3.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;0.0&lt;/td&gt;
+      &lt;td&gt;30451.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;50%&lt;/th&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;2003.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;105.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;6.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;0.0&lt;/td&gt;
+      &lt;td&gt;49577.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;75%&lt;/th&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;2008.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;150.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;9.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;0.0&lt;/td&gt;
+      &lt;td&gt;71540.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;max&lt;/th&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;9999.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;17700.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;12.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+      &lt;td&gt;0.0&lt;/td&gt;
+      &lt;td&gt;99998.000000&lt;/td&gt;
+      &lt;td&gt;NaN&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Our initial observations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;there are a number of text columns where nearly all of the values are the same:&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;seller&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;offer_type&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;the &lt;code&gt;num_photos&lt;/code&gt; column looks odd, which we'll need to investigate this further&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[6]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;num_photos&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[6]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;0    50000
+Name: num_photos, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;It looks like the &lt;code&gt;num_photos&lt;/code&gt; column has 0 for every column. We'll drop this column, plus the other two we noted.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[7]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;drop&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;num_photos&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;seller&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;offer_type&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The column &lt;code&gt;auto&lt;/code&gt; has numerical values with extra characters being stored as text. We'll clean and convert these.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;$&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;astype&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                 &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[8]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;0    5000
+1    8500
+2    8990
+3    4350
+4    1350
+Name: price, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[9]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;odometer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;odometer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;km&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;astype&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                 &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;rename&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;odometer&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;odometer_km&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt; &lt;span class="n"&gt;axis&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;inplace&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;odometer_km&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[9]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;0    150000
+1    150000
+2     70000
+3     70000
+4    150000
+Name: odometer_km, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;hr&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Exploring-the-odometer-and-price-columns"&gt;Exploring the odometer and price columns&lt;a class="anchor-link" href="#Exploring-the-odometer-and-price-columns"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;We will continue exploring the data, specifically looking for data that doesn't look right, first starting with the &lt;code&gt;odometer_km&lt;/code&gt; and &lt;code&gt;price&lt;/code&gt; columns. Here's the steps we'll take:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;analyze the columns using minimum and maximum values, and look for any values that look unrealistically high or low that we might want to remove&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[10]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;odometer_km&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[10]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;150000    32424
+125000     5170
+100000     2169
+90000      1757
+80000      1436
+70000      1230
+60000      1164
+50000      1027
+5000        967
+40000       819
+30000       789
+20000       784
+10000       264
+Name: odometer_km, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We can see that the values in this field are rounded, which might indicate that sellers had to choose from pre-set options for this field. Additionally, there are more high mileage than low mileage vehicles.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[11]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;describe&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;count    5.000000e+04
+mean     9.840044e+03
+std      4.811044e+05
+min      0.000000e+00
+25%      1.100000e+03
+50%      2.950000e+03
+75%      7.200000e+03
+max      1.000000e+08
+Name: price, dtype: float64
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[11]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;0       1421
+500      781
+1500     734
+2500     643
+1000     639
+1200     639
+600      531
+800      498
+3500     498
+2000     460
+999      434
+750      433
+900      420
+650      419
+850      410
+700      395
+4500     394
+300      384
+2200     382
+950      379
+Name: price, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Again, the prices in this column seem rounded. There are 1,421 cars listed with $0 price. Given that this is 2\% of the cars, we might consider removing these rows. The maximum price is 100 million dollars, so we'll look further into the highest prices.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ascending&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[12]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;99999999    1
+27322222    1
+12345678    3
+11111111    2
+10000000    1
+3890000     1
+1300000     1
+1234566     1
+999999      2
+999990      1
+350000      1
+345000      1
+299000      1
+295000      1
+265000      1
+259000      1
+250000      1
+220000      1
+198000      1
+197000      1
+Name: price, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;These are the cars with the lowest prices.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[13]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ascending&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[13]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;0     1421
+1      156
+2        3
+3        1
+5        2
+8        1
+9        1
+10       7
+11       2
+12       3
+13       2
+14       1
+15       2
+17       3
+18       1
+20       4
+25       5
+29       1
+30       7
+35       1
+Name: price, dtype: int64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;There are a number of listings with price below \$30. There are also a small number of listings with very high values.&lt;/p&gt;
+&lt;p&gt;Given that eBay is an auction site, there could legitimately be items where the opening bid is 1 dollar. We will keep the 1 dollar items, but remove anything above \$350,000 since it seems that prices increase steadily to that number and then jump up to less realistic numbers.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[14]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;between&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;351000&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;describe&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[14]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;count     48565.000000
+mean       5888.935591
+std        9059.854754
+min           1.000000
+25%        1200.000000
+50%        3000.000000
+75%        7490.000000
+max      350000.000000
+Name: price, dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;hr&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Exploring-the-date-columns"&gt;Exploring the date columns&lt;a class="anchor-link" href="#Exploring-the-date-columns"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We'll move on to the date columns and understand the date range the data covers. There are 5 columns that represent date values. Some were created by the crawler, while others came from the website itself.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;date_crawled&lt;/code&gt;: added by the crawler&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;last_seen&lt;/code&gt;: added by the crawler&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ad_created&lt;/code&gt;: from the website&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;registration_month&lt;/code&gt;: from the website&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;registration_year&lt;/code&gt;: from the website&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Right now, the &lt;code&gt;date_crawled&lt;/code&gt;, &lt;code&gt;last_seen&lt;/code&gt; and &lt;code&gt;ad_created&lt;/code&gt; columns are all identified as string values by pandas. Because these three columns are all represented as strings, we need to convert the data into a numerical representation so we can understand it quantitatively. The other two columns are represented as numeric values, so we can use methods like &lt;code&gt;Series.describe()&lt;/code&gt; to understand the distribution without any extra data processing.&lt;/p&gt;
+&lt;p&gt;We'll first understand how the values in the three string columns are formatted.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[15]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;date_crawled&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;ad_created&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;last_seen&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[15]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;date_crawled&lt;/th&gt;
+      &lt;th&gt;ad_created&lt;/th&gt;
+      &lt;th&gt;last_seen&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;0&lt;/th&gt;
+      &lt;td&gt;2016-03-26 17:47:46&lt;/td&gt;
+      &lt;td&gt;2016-03-26 00:00:00&lt;/td&gt;
+      &lt;td&gt;2016-04-06 06:45:54&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;td&gt;2016-04-04 13:38:56&lt;/td&gt;
+      &lt;td&gt;2016-04-04 00:00:00&lt;/td&gt;
+      &lt;td&gt;2016-04-06 14:45:08&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;td&gt;2016-03-26 18:57:24&lt;/td&gt;
+      &lt;td&gt;2016-03-26 00:00:00&lt;/td&gt;
+      &lt;td&gt;2016-04-06 20:15:37&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;td&gt;2016-03-12 16:58:10&lt;/td&gt;
+      &lt;td&gt;2016-03-12 00:00:00&lt;/td&gt;
+      &lt;td&gt;2016-03-15 03:16:28&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;td&gt;2016-04-01 14:38:50&lt;/td&gt;
+      &lt;td&gt;2016-04-01 00:00:00&lt;/td&gt;
+      &lt;td&gt;2016-04-01 14:38:50&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;We can see the the first 10 characters represent the day. To understand the date range, we can extract just the date values, use &lt;code&gt;Series.value_counts()&lt;/code&gt; to generate a distribution and then sort by the index.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[16]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;date_crawled&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dropna&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[16]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;2016-03-05    0.025327
+2016-03-06    0.014043
+2016-03-07    0.036014
+2016-03-08    0.033296
+2016-03-09    0.033090
+2016-03-10    0.032184
+2016-03-11    0.032575
+2016-03-12    0.036920
+2016-03-13    0.015670
+2016-03-14    0.036549
+2016-03-15    0.034284
+2016-03-16    0.029610
+2016-03-17    0.031628
+2016-03-18    0.012911
+2016-03-19    0.034778
+2016-03-20    0.037887
+2016-03-21    0.037373
+2016-03-22    0.032987
+2016-03-23    0.032225
+2016-03-24    0.029342
+2016-03-25    0.031607
+2016-03-26    0.032204
+2016-03-27    0.031092
+2016-03-28    0.034860
+2016-03-29    0.034099
+2016-03-30    0.033687
+2016-03-31    0.031834
+2016-04-01    0.033687
+2016-04-02    0.035478
+2016-04-03    0.038608
+2016-04-04    0.036487
+2016-04-05    0.013096
+2016-04-06    0.003171
+2016-04-07    0.001400
+Name: date_crawled, dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[17]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;date_crawled&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dropna&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_values&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[17]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;2016-04-07    0.001400
+2016-04-06    0.003171
+2016-03-18    0.012911
+2016-04-05    0.013096
+2016-03-06    0.014043
+2016-03-13    0.015670
+2016-03-05    0.025327
+2016-03-24    0.029342
+2016-03-16    0.029610
+2016-03-27    0.031092
+2016-03-25    0.031607
+2016-03-17    0.031628
+2016-03-31    0.031834
+2016-03-10    0.032184
+2016-03-26    0.032204
+2016-03-23    0.032225
+2016-03-11    0.032575
+2016-03-22    0.032987
+2016-03-09    0.033090
+2016-03-08    0.033296
+2016-03-30    0.033687
+2016-04-01    0.033687
+2016-03-29    0.034099
+2016-03-15    0.034284
+2016-03-19    0.034778
+2016-03-28    0.034860
+2016-04-02    0.035478
+2016-03-07    0.036014
+2016-04-04    0.036487
+2016-03-14    0.036549
+2016-03-12    0.036920
+2016-03-21    0.037373
+2016-03-20    0.037887
+2016-04-03    0.038608
+Name: date_crawled, dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;It appears that the site was crawled daily over roughly a one month period between March and April 2016. The distribution of listings crawled on each day is roughly uniform.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[18]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;last_seen&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dropna&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[18]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;2016-03-05    0.001071
+2016-03-06    0.004324
+2016-03-07    0.005395
+2016-03-08    0.007413
+2016-03-09    0.009595
+2016-03-10    0.010666
+2016-03-11    0.012375
+2016-03-12    0.023783
+2016-03-13    0.008895
+2016-03-14    0.012602
+2016-03-15    0.015876
+2016-03-16    0.016452
+2016-03-17    0.028086
+2016-03-18    0.007351
+2016-03-19    0.015834
+2016-03-20    0.020653
+2016-03-21    0.020632
+2016-03-22    0.021373
+2016-03-23    0.018532
+2016-03-24    0.019767
+2016-03-25    0.019211
+2016-03-26    0.016802
+2016-03-27    0.015649
+2016-03-28    0.020859
+2016-03-29    0.022341
+2016-03-30    0.024771
+2016-03-31    0.023783
+2016-04-01    0.022794
+2016-04-02    0.024915
+2016-04-03    0.025203
+2016-04-04    0.024483
+2016-04-05    0.124761
+2016-04-06    0.221806
+2016-04-07    0.131947
+Name: last_seen, dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The crawler recorded the date it last saw any listing, which allows us to determine on what day a listing was removed, presumably because the car was sold.&lt;/p&gt;
+&lt;p&gt;The last three days contain a disproportionate amount of 'last seen' values. Given that these are 6-10x the values from the previous days, it's unlikely that there was a massive spike in sales, and more likely that these values are to do with the crawling period ending and don't indicate car sales.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[19]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ad_created&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;unique&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;ad_created&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;str&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dropna&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_index&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt"&gt;&lt;/div&gt;
+
+
+&lt;div class="output_subarea output_stream output_stdout output_text"&gt;
+&lt;pre&gt;(76,)
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[19]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;2015-06-11    0.000021
+2015-08-10    0.000021
+2015-09-09    0.000021
+2015-11-10    0.000021
+2015-12-05    0.000021
+2015-12-30    0.000021
+2016-01-03    0.000021
+2016-01-07    0.000021
+2016-01-10    0.000041
+2016-01-13    0.000021
+2016-01-14    0.000021
+2016-01-16    0.000021
+2016-01-22    0.000021
+2016-01-27    0.000062
+2016-01-29    0.000021
+2016-02-01    0.000021
+2016-02-02    0.000041
+2016-02-05    0.000041
+2016-02-07    0.000021
+2016-02-08    0.000021
+2016-02-09    0.000021
+2016-02-11    0.000021
+2016-02-12    0.000041
+2016-02-14    0.000041
+2016-02-16    0.000021
+2016-02-17    0.000021
+2016-02-18    0.000041
+2016-02-19    0.000062
+2016-02-20    0.000041
+2016-02-21    0.000062
+                ...   
+2016-03-09    0.033151
+2016-03-10    0.031895
+2016-03-11    0.032904
+2016-03-12    0.036755
+2016-03-13    0.017008
+2016-03-14    0.035190
+2016-03-15    0.034016
+2016-03-16    0.030125
+2016-03-17    0.031278
+2016-03-18    0.013590
+2016-03-19    0.033687
+2016-03-20    0.037949
+2016-03-21    0.037579
+2016-03-22    0.032801
+2016-03-23    0.032060
+2016-03-24    0.029280
+2016-03-25    0.031751
+2016-03-26    0.032266
+2016-03-27    0.030989
+2016-03-28    0.034984
+2016-03-29    0.034037
+2016-03-30    0.033501
+2016-03-31    0.031875
+2016-04-01    0.033687
+2016-04-02    0.035149
+2016-04-03    0.038855
+2016-04-04    0.036858
+2016-04-05    0.011819
+2016-04-06    0.003253
+2016-04-07    0.001256
+Name: ad_created, Length: 76, dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;There is a large variety of ad created dates. Most fall within 1-2 months of the listing date, but a few are quite old, with the oldest at around 9 months.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[20]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;registration_year&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;describe&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[20]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;count    48565.000000
+mean      2004.755421
+std         88.643887
+min       1000.000000
+25%       1999.000000
+50%       2004.000000
+75%       2008.000000
+max       9999.000000
+Name: registration_year, dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The year the the car was first registered will likely indicate the age of the car. Looking at this column, we note some odd values. The minimum values is 1000, long before cars were invented and the maximum is 9999, many years into the future.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;hr&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Dealing-with-incorrect-registration-year-data"&gt;Dealing with incorrect registration year data&lt;a class="anchor-link" href="#Dealing-with-incorrect-registration-year-data"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Because a car can't be first registered after the listing was seen, any vehicle with a registration year above 2016 is definitely inaccurate. Determining the earliest valid year is more difficult. Realistically, it could be somewhere in the first few decades of the 1900s.&lt;/p&gt;
+&lt;p&gt;We'll count the number of listings with cars that fall outside the 1900-2016 interval and see if it's same to remove those rows entirely, or if we need more custom logic. First, we'll determine the percentage of our data that has invalid values.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[21]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;~&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;registration_year&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;between&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1900&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2016&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sum&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[21]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;0.038793369710697&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Given that this is less than 4% of our data, we will remove these rows.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[22]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;registration_year&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;between&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1900&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;2016&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;registration_year&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[22]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;2000    0.067608
+2005    0.062895
+1999    0.062060
+2004    0.057904
+2003    0.057818
+2006    0.057197
+2001    0.056468
+2002    0.053255
+1998    0.050620
+2007    0.048778
+Name: registration_year, dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;It appears that most of the vehicles are now first registered in the past 20 years.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;hr&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Exploring-price-by-brand"&gt;Exploring price by brand&lt;a class="anchor-link" href="#Exploring-price-by-brand"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;When working with data on cars, it's natural to explore variations across different car brands. We can use aggregation to understand the &lt;code&gt;brand&lt;/code&gt; column.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[23]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;brand&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[23]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;volkswagen        0.211264
+bmw               0.110045
+opel              0.107581
+mercedes_benz     0.096463
+audi              0.086566
+ford              0.069900
+renault           0.047150
+peugeot           0.029841
+fiat              0.025642
+seat              0.018273
+skoda             0.016409
+nissan            0.015274
+mazda             0.015188
+smart             0.014160
+citroen           0.014010
+toyota            0.012703
+hyundai           0.010025
+sonstige_autos    0.009811
+volvo             0.009147
+mini              0.008762
+mitsubishi        0.008226
+honda             0.007840
+kia               0.007069
+alfa_romeo        0.006641
+porsche           0.006127
+suzuki            0.005934
+chevrolet         0.005698
+chrysler          0.003513
+dacia             0.002635
+daihatsu          0.002506
+jeep              0.002271
+subaru            0.002142
+land_rover        0.002099
+saab              0.001649
+jaguar            0.001564
+daewoo            0.001500
+trabant           0.001392
+rover             0.001328
+lancia            0.001071
+lada              0.000578
+Name: brand, dtype: float64&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;German manufacturers represent four out of the top five brands, almost 50% of the overall listings. Volkswagen is by far the most popular brand, with approximately double the cars for sale of the next two brands combined.&lt;/p&gt;
+&lt;p&gt;There are lots of brands that don't have a significant percentage of listings, so we will limit our analysis to brands representing more than 5% of total listings.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[24]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brand_counts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;brand&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value_counts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;normalize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;common_brands&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;brand_counts&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;brand_counts&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mf"&gt;0.05&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;
+&lt;span class="n"&gt;common_brands&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[24]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;Index([&amp;#39;volkswagen&amp;#39;, &amp;#39;bmw&amp;#39;, &amp;#39;opel&amp;#39;, &amp;#39;mercedes_benz&amp;#39;, &amp;#39;audi&amp;#39;, &amp;#39;ford&amp;#39;], dtype=&amp;#39;object&amp;#39;)&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[25]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brand_mean_prices&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;brand&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;common_brands&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;brand_only&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;brand&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;brand&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;mean_price&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;brand_only&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;brand_mean_prices&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;brand&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean_price&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    
+&lt;span class="n"&gt;brand_mean_prices&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[25]:&lt;/div&gt;
+
+
+
+
+&lt;div class="output_text output_subarea output_execute_result"&gt;
+&lt;pre&gt;{&amp;#39;volkswagen&amp;#39;: 5402,
+ &amp;#39;bmw&amp;#39;: 8332,
+ &amp;#39;opel&amp;#39;: 2975,
+ &amp;#39;mercedes_benz&amp;#39;: 8628,
+ &amp;#39;audi&amp;#39;: 9336,
+ &amp;#39;ford&amp;#39;: 3749}&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Of the top 5 brands, there is a distinct price gap:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Audi, BMW and Mercedes Benz are more expensive&lt;/li&gt;
+&lt;li&gt;Ford and Opel are less expensive&lt;/li&gt;
+&lt;li&gt;Volkswagen is in between – this may explain its popularity&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;hr&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Storing-aggregate-data-in-a-dataframe"&gt;Storing aggregate data in a dataframe&lt;a class="anchor-link" href="#Storing-aggregate-data-in-a-dataframe"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;From the top 6 brands, let's use aggregation to understand the average mileage for those cars and if there's any visible link with mean price. While our natural instinct may be to display both aggregated series objects and visually compare them, this has a few limitations:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;it's difficult to compare more than two aggregate series objects if we want to extend more columns&lt;/li&gt;
+&lt;li&gt;we can't compare more than a few rows from each series object&lt;/li&gt;
+&lt;li&gt;we can only sort by the index (brand name) of both series objects so we can easily make visual comparisons&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Instead, we can combine the data from both series objects into a single dataframe (with a shared index) and display the dataframe directly. To do this, we'll sue the pandas series constructor and the pandas dataframe constructor.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[26]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;bmp_series&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Series&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brand_mean_prices&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;bmp_series&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mean_price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[26]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;mean_price&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;volkswagen&lt;/th&gt;
+      &lt;td&gt;5402&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;bmw&lt;/th&gt;
+      &lt;td&gt;8332&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;opel&lt;/th&gt;
+      &lt;td&gt;2975&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;mercedes_benz&lt;/th&gt;
+      &lt;td&gt;8628&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;audi&lt;/th&gt;
+      &lt;td&gt;9336&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;ford&lt;/th&gt;
+      &lt;td&gt;3749&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[27]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brand_mean_mileage&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;brand&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;common_brands&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;brand_only&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;autos&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;brand&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;brand&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;mean_mileage&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;brand_only&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;odometer_km&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;mean&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;brand_mean_mileage&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;brand&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean_mileage&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;mean_mileage&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Series&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brand_mean_mileage&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ascending&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;mean_prices&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Series&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;brand_mean_prices&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sort_values&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ascending&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[28]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brand_info&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pd&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;DataFrame&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mean_mileage&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;columns&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mean_mileage&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="n"&gt;brand_info&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[28]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;mean_mileage&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;bmw&lt;/th&gt;
+      &lt;td&gt;132572&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;mercedes_benz&lt;/th&gt;
+      &lt;td&gt;130788&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;opel&lt;/th&gt;
+      &lt;td&gt;129310&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;audi&lt;/th&gt;
+      &lt;td&gt;129157&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;volkswagen&lt;/th&gt;
+      &lt;td&gt;128707&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;ford&lt;/th&gt;
+      &lt;td&gt;124266&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In&amp;nbsp;[29]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class=" highlight hl-ipython3"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;brand_info&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;mean_price&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mean_prices&lt;/span&gt;
+&lt;span class="n"&gt;brand_info&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;
+
+    &lt;div class="prompt output_prompt"&gt;Out[29]:&lt;/div&gt;
+
+
+
+&lt;div class="output_html rendered_html output_subarea output_execute_result"&gt;
+&lt;div&gt;
+&lt;style scoped&gt;
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+&lt;/style&gt;
+&lt;table border="1" class="dataframe"&gt;
+  &lt;thead&gt;
+    &lt;tr style="text-align: right;"&gt;
+      &lt;th&gt;&lt;/th&gt;
+      &lt;th&gt;mean_mileage&lt;/th&gt;
+      &lt;th&gt;mean_price&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;th&gt;bmw&lt;/th&gt;
+      &lt;td&gt;132572&lt;/td&gt;
+      &lt;td&gt;8332&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;mercedes_benz&lt;/th&gt;
+      &lt;td&gt;130788&lt;/td&gt;
+      &lt;td&gt;8628&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;opel&lt;/th&gt;
+      &lt;td&gt;129310&lt;/td&gt;
+      &lt;td&gt;2975&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;audi&lt;/th&gt;
+      &lt;td&gt;129157&lt;/td&gt;
+      &lt;td&gt;9336&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;volkswagen&lt;/th&gt;
+      &lt;td&gt;128707&lt;/td&gt;
+      &lt;td&gt;5402&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;th&gt;ford&lt;/th&gt;
+      &lt;td&gt;124266&lt;/td&gt;
+      &lt;td&gt;3749&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The range of car mileages does not vary as much as the prices do by brand, instead all falling within 10% for the top brands. There is a slight trend to the more expensive vehicles having higher mileage,with the less expensive vehicles having lower mileage.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+ 
+
+
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;
+</summary><category term="datquest"></category></entry><entry><title>Exploring Hacker News Posts</title><link href="https://json-lou.github.io/dq-02.html" rel="alternate"></link><published>2019-05-31T00:00:00-04:00</published><updated>2019-05-31T00:00:00-04:00</updated><author><name>Jayson Lou</name></author><id>tag:json-lou.github.io,2019-05-31:dq-02.html</id><summary type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *

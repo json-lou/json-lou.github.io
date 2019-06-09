@@ -1,0 +1,3842 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+            <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Jayson's Portfolio</title>
+
+            <link href="https://json-lou.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Jayson's Portfolio Full Atom Feed" />
+            <link href="https://json-lou.github.io/feeds/dataquest.atom.xml" type="application/atom+xml" rel="alternate" title="Jayson's Portfolio Categories Atom Feed" />
+
+        <!-- Bootstrap Core CSS -->
+        <link href="https://json-lou.github.io/theme/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href="https://json-lou.github.io/theme/css/clean-blog.min.css" rel="stylesheet">
+
+        <!-- Code highlight color scheme -->
+            <link href="https://json-lou.github.io/theme/css/code_blocks/github.css" rel="stylesheet">
+
+        <!-- Custom Fonts -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+
+
+
+        <meta name="tags" contents="datquest" />
+
+
+			<meta property="og:locale" content="en">
+		<meta property="og:site_name" content="Jayson's Portfolio">
+
+	<meta property="og:type" content="article">
+	<meta property="article:author" content="">
+	<meta property="og:url" content="https://json-lou.github.io/dq-03.html">
+	<meta property="og:title" content="Exploring eBay Car Sales Data">
+	<meta property="og:description" content="">
+	<meta property="og:image" content="https://json-lou.github.io/">
+	<meta property="article:published_time" content="2019-06-07 00:00:00-04:00">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://json-lou.github.io/">Jayson's Portfolio</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+        <header class="intro-header" style="background-image: url('https://json-lou.github.io/theme/images/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Exploring eBay Car Sales Data</h1>
+                        <span class="meta">Posted by
+                                <a href="https://json-lou.github.io/author/jayson-lou.html">Jayson Lou</a>
+                             on Fri 07 June 2019
+                        </span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <!-- Post Content -->
+    <article>
+        <style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
+.ansibold {
+  font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
+  border-color: #ababab;
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
+}
+@media print {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
+  border: 0;
+  border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+div.output_area .mglyph > img {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 1px 0 1px 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+
+
+
+.rendered_html pre,
+
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Exploring-eBay-Car-Sales-Data">Exploring eBay Car Sales Data<a class="anchor-link" href="#Exploring-eBay-Car-Sales-Data">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h2><p>In this project, we'll work with a dataset of used cards from <strong>eBay Kleinanzeigen</strong>, a classifieds section of the German eBay website.</p>
+<p>Some of the data provided is as follows:</p>
+<ul>
+<li><code>dateCrawled</code>: when this ad was first crawled</li>
+<li><code>name</code>: name of the car</li>
+<li><code>seller</code>: whether the seller is private or a dealer</li>
+<li><code>offerType</code>: the type of listing</li>
+<li><code>price</code>: the price on the ad to sell the car</li>
+</ul>
+<p>The aim of this project is to clean the data and analyze the included used car listings. We'll import the libraries we need and read the dataset into pandas.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">autos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;autos.csv&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;Latin-1&#39;</span><span class="p">)</span>
+<span class="n">autos</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[1]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>dateCrawled</th>
+      <th>name</th>
+      <th>seller</th>
+      <th>offerType</th>
+      <th>price</th>
+      <th>abtest</th>
+      <th>vehicleType</th>
+      <th>yearOfRegistration</th>
+      <th>gearbox</th>
+      <th>powerPS</th>
+      <th>model</th>
+      <th>odometer</th>
+      <th>monthOfRegistration</th>
+      <th>fuelType</th>
+      <th>brand</th>
+      <th>notRepairedDamage</th>
+      <th>dateCreated</th>
+      <th>nrOfPictures</th>
+      <th>postalCode</th>
+      <th>lastSeen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2016-03-26 17:47:46</td>
+      <td>Peugeot_807_160_NAVTECH_ON_BOARD</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$5,000</td>
+      <td>control</td>
+      <td>bus</td>
+      <td>2004</td>
+      <td>manuell</td>
+      <td>158</td>
+      <td>andere</td>
+      <td>150,000km</td>
+      <td>3</td>
+      <td>lpg</td>
+      <td>peugeot</td>
+      <td>nein</td>
+      <td>2016-03-26 00:00:00</td>
+      <td>0</td>
+      <td>79588</td>
+      <td>2016-04-06 06:45:54</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2016-04-04 13:38:56</td>
+      <td>BMW_740i_4_4_Liter_HAMANN_UMBAU_Mega_Optik</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$8,500</td>
+      <td>control</td>
+      <td>limousine</td>
+      <td>1997</td>
+      <td>automatik</td>
+      <td>286</td>
+      <td>7er</td>
+      <td>150,000km</td>
+      <td>6</td>
+      <td>benzin</td>
+      <td>bmw</td>
+      <td>nein</td>
+      <td>2016-04-04 00:00:00</td>
+      <td>0</td>
+      <td>71034</td>
+      <td>2016-04-06 14:45:08</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2016-03-26 18:57:24</td>
+      <td>Volkswagen_Golf_1.6_United</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$8,990</td>
+      <td>test</td>
+      <td>limousine</td>
+      <td>2009</td>
+      <td>manuell</td>
+      <td>102</td>
+      <td>golf</td>
+      <td>70,000km</td>
+      <td>7</td>
+      <td>benzin</td>
+      <td>volkswagen</td>
+      <td>nein</td>
+      <td>2016-03-26 00:00:00</td>
+      <td>0</td>
+      <td>35394</td>
+      <td>2016-04-06 20:15:37</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2016-03-12 16:58:10</td>
+      <td>Smart_smart_fortwo_coupe_softouch/F1/Klima/Pan...</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$4,350</td>
+      <td>control</td>
+      <td>kleinwagen</td>
+      <td>2007</td>
+      <td>automatik</td>
+      <td>71</td>
+      <td>fortwo</td>
+      <td>70,000km</td>
+      <td>6</td>
+      <td>benzin</td>
+      <td>smart</td>
+      <td>nein</td>
+      <td>2016-03-12 00:00:00</td>
+      <td>0</td>
+      <td>33729</td>
+      <td>2016-03-15 03:16:28</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2016-04-01 14:38:50</td>
+      <td>Ford_Focus_1_6_Benzin_TÜV_neu_ist_sehr_gepfleg...</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$1,350</td>
+      <td>test</td>
+      <td>kombi</td>
+      <td>2003</td>
+      <td>manuell</td>
+      <td>0</td>
+      <td>focus</td>
+      <td>150,000km</td>
+      <td>7</td>
+      <td>benzin</td>
+      <td>ford</td>
+      <td>nein</td>
+      <td>2016-04-01 00:00:00</td>
+      <td>0</td>
+      <td>39218</td>
+      <td>2016-04-01 14:38:50</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 50000 entries, 0 to 49999
+Data columns (total 20 columns):
+dateCrawled            50000 non-null object
+name                   50000 non-null object
+seller                 50000 non-null object
+offerType              50000 non-null object
+price                  50000 non-null object
+abtest                 50000 non-null object
+vehicleType            44905 non-null object
+yearOfRegistration     50000 non-null int64
+gearbox                47320 non-null object
+powerPS                50000 non-null int64
+model                  47242 non-null object
+odometer               50000 non-null object
+monthOfRegistration    50000 non-null int64
+fuelType               45518 non-null object
+brand                  50000 non-null object
+notRepairedDamage      40171 non-null object
+dateCreated            50000 non-null object
+nrOfPictures           50000 non-null int64
+postalCode             50000 non-null int64
+lastSeen               50000 non-null object
+dtypes: int64(5), object(15)
+memory usage: 7.6+ MB
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Cleaning-column-names">Cleaning column names<a class="anchor-link" href="#Cleaning-column-names">&#182;</a></h2><p>From the above output, we can make the following observations:</p>
+<ul>
+<li>the dataset contains 20 columns, most of which are strings</li>
+<li>some columns have null values, but none have more than ~20% null values</li>
+<li>the column names use <strong>camelcase</strong> instead of the preferred <strong>snakecase</strong></li>
+</ul>
+<p>We'll convert the column names from camelcase to snakecase, and reword some of the column names based on the data dictionary to be more descriptive.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;dateCrawled&#39;, &#39;name&#39;, &#39;seller&#39;, &#39;offerType&#39;, &#39;price&#39;, &#39;abtest&#39;,
+       &#39;vehicleType&#39;, &#39;yearOfRegistration&#39;, &#39;gearbox&#39;, &#39;powerPS&#39;, &#39;model&#39;,
+       &#39;odometer&#39;, &#39;monthOfRegistration&#39;, &#39;fuelType&#39;, &#39;brand&#39;,
+       &#39;notRepairedDamage&#39;, &#39;dateCreated&#39;, &#39;nrOfPictures&#39;, &#39;postalCode&#39;,
+       &#39;lastSeen&#39;],
+      dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We'll add the changes below.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;date_crawled&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;seller&#39;</span><span class="p">,</span> <span class="s1">&#39;offer_type&#39;</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;ab_test&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;vehicle_type&#39;</span><span class="p">,</span> <span class="s1">&#39;registration_year&#39;</span><span class="p">,</span> <span class="s1">&#39;gearbox&#39;</span><span class="p">,</span> <span class="s1">&#39;power_ps&#39;</span><span class="p">,</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;odometer&#39;</span><span class="p">,</span> <span class="s1">&#39;registration_month&#39;</span><span class="p">,</span> <span class="s1">&#39;fuel_type&#39;</span><span class="p">,</span> <span class="s1">&#39;brand&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;unrepaired_damage&#39;</span><span class="p">,</span> <span class="s1">&#39;ad_created&#39;</span><span class="p">,</span> <span class="s1">&#39;num_photos&#39;</span><span class="p">,</span> <span class="s1">&#39;postal_code&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;last_seen&#39;</span><span class="p">]</span>
+
+<span class="n">autos</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">new_columns</span>
+<span class="n">autos</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date_crawled</th>
+      <th>name</th>
+      <th>seller</th>
+      <th>offer_type</th>
+      <th>price</th>
+      <th>ab_test</th>
+      <th>vehicle_type</th>
+      <th>registration_year</th>
+      <th>gearbox</th>
+      <th>power_ps</th>
+      <th>model</th>
+      <th>odometer</th>
+      <th>registration_month</th>
+      <th>fuel_type</th>
+      <th>brand</th>
+      <th>unrepaired_damage</th>
+      <th>ad_created</th>
+      <th>num_photos</th>
+      <th>postal_code</th>
+      <th>last_seen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2016-03-26 17:47:46</td>
+      <td>Peugeot_807_160_NAVTECH_ON_BOARD</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$5,000</td>
+      <td>control</td>
+      <td>bus</td>
+      <td>2004</td>
+      <td>manuell</td>
+      <td>158</td>
+      <td>andere</td>
+      <td>150,000km</td>
+      <td>3</td>
+      <td>lpg</td>
+      <td>peugeot</td>
+      <td>nein</td>
+      <td>2016-03-26 00:00:00</td>
+      <td>0</td>
+      <td>79588</td>
+      <td>2016-04-06 06:45:54</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2016-04-04 13:38:56</td>
+      <td>BMW_740i_4_4_Liter_HAMANN_UMBAU_Mega_Optik</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$8,500</td>
+      <td>control</td>
+      <td>limousine</td>
+      <td>1997</td>
+      <td>automatik</td>
+      <td>286</td>
+      <td>7er</td>
+      <td>150,000km</td>
+      <td>6</td>
+      <td>benzin</td>
+      <td>bmw</td>
+      <td>nein</td>
+      <td>2016-04-04 00:00:00</td>
+      <td>0</td>
+      <td>71034</td>
+      <td>2016-04-06 14:45:08</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2016-03-26 18:57:24</td>
+      <td>Volkswagen_Golf_1.6_United</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$8,990</td>
+      <td>test</td>
+      <td>limousine</td>
+      <td>2009</td>
+      <td>manuell</td>
+      <td>102</td>
+      <td>golf</td>
+      <td>70,000km</td>
+      <td>7</td>
+      <td>benzin</td>
+      <td>volkswagen</td>
+      <td>nein</td>
+      <td>2016-03-26 00:00:00</td>
+      <td>0</td>
+      <td>35394</td>
+      <td>2016-04-06 20:15:37</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2016-03-12 16:58:10</td>
+      <td>Smart_smart_fortwo_coupe_softouch/F1/Klima/Pan...</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$4,350</td>
+      <td>control</td>
+      <td>kleinwagen</td>
+      <td>2007</td>
+      <td>automatik</td>
+      <td>71</td>
+      <td>fortwo</td>
+      <td>70,000km</td>
+      <td>6</td>
+      <td>benzin</td>
+      <td>smart</td>
+      <td>nein</td>
+      <td>2016-03-12 00:00:00</td>
+      <td>0</td>
+      <td>33729</td>
+      <td>2016-03-15 03:16:28</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2016-04-01 14:38:50</td>
+      <td>Ford_Focus_1_6_Benzin_TÜV_neu_ist_sehr_gepfleg...</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$1,350</td>
+      <td>test</td>
+      <td>kombi</td>
+      <td>2003</td>
+      <td>manuell</td>
+      <td>0</td>
+      <td>focus</td>
+      <td>150,000km</td>
+      <td>7</td>
+      <td>benzin</td>
+      <td>ford</td>
+      <td>nein</td>
+      <td>2016-04-01 00:00:00</td>
+      <td>0</td>
+      <td>39218</td>
+      <td>2016-04-01 14:38:50</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Initial-exploration-and-cleaning">Initial exploration and cleaning<a class="anchor-link" href="#Initial-exploration-and-cleaning">&#182;</a></h2><p>Now, we'll do some basic data exploration to determine what other cleaning tasks need to be done. Initially, we will look for:</p>
+<ul>
+<li>text columns where all or almost all values are the same</li>
+<li>examples of numeric data stored as text which can be cleaned and coverted</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date_crawled</th>
+      <th>name</th>
+      <th>seller</th>
+      <th>offer_type</th>
+      <th>price</th>
+      <th>ab_test</th>
+      <th>vehicle_type</th>
+      <th>registration_year</th>
+      <th>gearbox</th>
+      <th>power_ps</th>
+      <th>model</th>
+      <th>odometer</th>
+      <th>registration_month</th>
+      <th>fuel_type</th>
+      <th>brand</th>
+      <th>unrepaired_damage</th>
+      <th>ad_created</th>
+      <th>num_photos</th>
+      <th>postal_code</th>
+      <th>last_seen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>50000</td>
+      <td>50000</td>
+      <td>50000</td>
+      <td>50000</td>
+      <td>50000</td>
+      <td>50000</td>
+      <td>44905</td>
+      <td>50000.000000</td>
+      <td>47320</td>
+      <td>50000.000000</td>
+      <td>47242</td>
+      <td>50000</td>
+      <td>50000.000000</td>
+      <td>45518</td>
+      <td>50000</td>
+      <td>40171</td>
+      <td>50000</td>
+      <td>50000.0</td>
+      <td>50000.000000</td>
+      <td>50000</td>
+    </tr>
+    <tr>
+      <th>unique</th>
+      <td>48213</td>
+      <td>38754</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2357</td>
+      <td>2</td>
+      <td>8</td>
+      <td>NaN</td>
+      <td>2</td>
+      <td>NaN</td>
+      <td>245</td>
+      <td>13</td>
+      <td>NaN</td>
+      <td>7</td>
+      <td>40</td>
+      <td>2</td>
+      <td>76</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>39481</td>
+    </tr>
+    <tr>
+      <th>top</th>
+      <td>2016-03-09 11:54:38</td>
+      <td>Ford_Fiesta</td>
+      <td>privat</td>
+      <td>Angebot</td>
+      <td>$0</td>
+      <td>test</td>
+      <td>limousine</td>
+      <td>NaN</td>
+      <td>manuell</td>
+      <td>NaN</td>
+      <td>golf</td>
+      <td>150,000km</td>
+      <td>NaN</td>
+      <td>benzin</td>
+      <td>volkswagen</td>
+      <td>nein</td>
+      <td>2016-04-03 00:00:00</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2016-04-07 06:17:27</td>
+    </tr>
+    <tr>
+      <th>freq</th>
+      <td>3</td>
+      <td>78</td>
+      <td>49999</td>
+      <td>49999</td>
+      <td>1421</td>
+      <td>25756</td>
+      <td>12859</td>
+      <td>NaN</td>
+      <td>36993</td>
+      <td>NaN</td>
+      <td>4024</td>
+      <td>32424</td>
+      <td>NaN</td>
+      <td>30107</td>
+      <td>10687</td>
+      <td>35232</td>
+      <td>1946</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2005.073280</td>
+      <td>NaN</td>
+      <td>116.355920</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5.723360</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>50813.627300</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>105.712813</td>
+      <td>NaN</td>
+      <td>209.216627</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.711984</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>25779.747957</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1000.000000</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>1067.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1999.000000</td>
+      <td>NaN</td>
+      <td>70.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>30451.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2003.000000</td>
+      <td>NaN</td>
+      <td>105.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>6.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>49577.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2008.000000</td>
+      <td>NaN</td>
+      <td>150.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>9.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>71540.000000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>9999.000000</td>
+      <td>NaN</td>
+      <td>17700.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12.000000</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>99998.000000</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Our initial observations:</p>
+<ul>
+<li>there are a number of text columns where nearly all of the values are the same:<ul>
+<li><code>seller</code></li>
+<li><code>offer_type</code></li>
+</ul>
+</li>
+<li>the <code>num_photos</code> column looks odd, which we'll need to investigate this further</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;num_photos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0    50000
+Name: num_photos, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It looks like the <code>num_photos</code> column has 0 for every column. We'll drop this column, plus the other two we noted.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span> <span class="o">=</span> <span class="n">autos</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;num_photos&#39;</span><span class="p">,</span> <span class="s1">&#39;seller&#39;</span><span class="p">,</span> <span class="s1">&#39;offer_type&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The column <code>auto</code> has numerical values with extra characters being stored as text. We'll clean and convert these.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+                    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;$&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+                 <span class="p">)</span>
+<span class="n">autos</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0    5000
+1    8500
+2    8990
+3    4350
+4    1350
+Name: price, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;odometer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;odometer&#39;</span><span class="p">]</span>
+                        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;km&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+                 <span class="p">)</span>
+<span class="n">autos</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s1">&#39;odometer&#39;</span><span class="p">:</span> <span class="s1">&#39;odometer_km&#39;</span><span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">autos</span><span class="p">[</span><span class="s1">&#39;odometer_km&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0    150000
+1    150000
+2     70000
+3     70000
+4    150000
+Name: odometer_km, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exploring-the-odometer-and-price-columns">Exploring the odometer and price columns<a class="anchor-link" href="#Exploring-the-odometer-and-price-columns">&#182;</a></h2><p>We will continue exploring the data, specifically looking for data that doesn't look right, first starting with the <code>odometer_km</code> and <code>price</code> columns. Here's the steps we'll take:</p>
+<ul>
+<li>analyze the columns using minimum and maximum values, and look for any values that look unrealistically high or low that we might want to remove</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;odometer_km&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>150000    32424
+125000     5170
+100000     2169
+90000      1757
+80000      1436
+70000      1230
+60000      1164
+50000      1027
+5000        967
+40000       819
+30000       789
+20000       784
+10000       264
+Name: odometer_km, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can see that the values in this field are rounded, which might indicate that sellers had to choose from pre-set options for this field. Additionally, there are more high mileage than low mileage vehicles.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="n">autos</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>count    5.000000e+04
+mean     9.840044e+03
+std      4.811044e+05
+min      0.000000e+00
+25%      1.100000e+03
+50%      2.950000e+03
+75%      7.200000e+03
+max      1.000000e+08
+Name: price, dtype: float64
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0       1421
+500      781
+1500     734
+2500     643
+1000     639
+1200     639
+600      531
+800      498
+3500     498
+2000     460
+999      434
+750      433
+900      420
+650      419
+850      410
+700      395
+4500     394
+300      384
+2200     382
+950      379
+Name: price, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Again, the prices in this column seem rounded. There are 1,421 cars listed with $0 price. Given that this is 2\% of the cars, we might consider removing these rows. The maximum price is 100 million dollars, so we'll look further into the highest prices.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>99999999    1
+27322222    1
+12345678    3
+11111111    2
+10000000    1
+3890000     1
+1300000     1
+1234566     1
+999999      2
+999990      1
+350000      1
+345000      1
+299000      1
+295000      1
+265000      1
+259000      1
+250000      1
+220000      1
+198000      1
+197000      1
+Name: price, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These are the cars with the lowest prices.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[13]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0     1421
+1      156
+2        3
+3        1
+5        2
+8        1
+9        1
+10       7
+11       2
+12       3
+13       2
+14       1
+15       2
+17       3
+18       1
+20       4
+25       5
+29       1
+30       7
+35       1
+Name: price, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are a number of listings with price below \$30. There are also a small number of listings with very high values.</p>
+<p>Given that eBay is an auction site, there could legitimately be items where the opening bid is 1 dollar. We will keep the 1 dollar items, but remove anything above \$350,000 since it seems that prices increase steadily to that number and then jump up to less realistic numbers.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span> <span class="o">=</span> <span class="n">autos</span><span class="p">[</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">351000</span><span class="p">)]</span>
+<span class="n">autos</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>count     48565.000000
+mean       5888.935591
+std        9059.854754
+min           1.000000
+25%        1200.000000
+50%        3000.000000
+75%        7490.000000
+max      350000.000000
+Name: price, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exploring-the-date-columns">Exploring the date columns<a class="anchor-link" href="#Exploring-the-date-columns">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We'll move on to the date columns and understand the date range the data covers. There are 5 columns that represent date values. Some were created by the crawler, while others came from the website itself.</p>
+<ul>
+<li><code>date_crawled</code>: added by the crawler</li>
+<li><code>last_seen</code>: added by the crawler</li>
+<li><code>ad_created</code>: from the website</li>
+<li><code>registration_month</code>: from the website</li>
+<li><code>registration_year</code>: from the website</li>
+</ul>
+<p>Right now, the <code>date_crawled</code>, <code>last_seen</code> and <code>ad_created</code> columns are all identified as string values by pandas. Because these three columns are all represented as strings, we need to convert the data into a numerical representation so we can understand it quantitatively. The other two columns are represented as numeric values, so we can use methods like <code>Series.describe()</code> to understand the distribution without any extra data processing.</p>
+<p>We'll first understand how the values in the three string columns are formatted.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="p">[[</span><span class="s1">&#39;date_crawled&#39;</span><span class="p">,</span> <span class="s1">&#39;ad_created&#39;</span><span class="p">,</span> <span class="s1">&#39;last_seen&#39;</span><span class="p">]][</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date_crawled</th>
+      <th>ad_created</th>
+      <th>last_seen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2016-03-26 17:47:46</td>
+      <td>2016-03-26 00:00:00</td>
+      <td>2016-04-06 06:45:54</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2016-04-04 13:38:56</td>
+      <td>2016-04-04 00:00:00</td>
+      <td>2016-04-06 14:45:08</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2016-03-26 18:57:24</td>
+      <td>2016-03-26 00:00:00</td>
+      <td>2016-04-06 20:15:37</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2016-03-12 16:58:10</td>
+      <td>2016-03-12 00:00:00</td>
+      <td>2016-03-15 03:16:28</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2016-04-01 14:38:50</td>
+      <td>2016-04-01 00:00:00</td>
+      <td>2016-04-01 14:38:50</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can see the the first 10 characters represent the day. To understand the date range, we can extract just the date values, use <code>Series.value_counts()</code> to generate a distribution and then sort by the index.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;date_crawled&#39;</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2016-03-05    0.025327
+2016-03-06    0.014043
+2016-03-07    0.036014
+2016-03-08    0.033296
+2016-03-09    0.033090
+2016-03-10    0.032184
+2016-03-11    0.032575
+2016-03-12    0.036920
+2016-03-13    0.015670
+2016-03-14    0.036549
+2016-03-15    0.034284
+2016-03-16    0.029610
+2016-03-17    0.031628
+2016-03-18    0.012911
+2016-03-19    0.034778
+2016-03-20    0.037887
+2016-03-21    0.037373
+2016-03-22    0.032987
+2016-03-23    0.032225
+2016-03-24    0.029342
+2016-03-25    0.031607
+2016-03-26    0.032204
+2016-03-27    0.031092
+2016-03-28    0.034860
+2016-03-29    0.034099
+2016-03-30    0.033687
+2016-03-31    0.031834
+2016-04-01    0.033687
+2016-04-02    0.035478
+2016-04-03    0.038608
+2016-04-04    0.036487
+2016-04-05    0.013096
+2016-04-06    0.003171
+2016-04-07    0.001400
+Name: date_crawled, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;date_crawled&#39;</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2016-04-07    0.001400
+2016-04-06    0.003171
+2016-03-18    0.012911
+2016-04-05    0.013096
+2016-03-06    0.014043
+2016-03-13    0.015670
+2016-03-05    0.025327
+2016-03-24    0.029342
+2016-03-16    0.029610
+2016-03-27    0.031092
+2016-03-25    0.031607
+2016-03-17    0.031628
+2016-03-31    0.031834
+2016-03-10    0.032184
+2016-03-26    0.032204
+2016-03-23    0.032225
+2016-03-11    0.032575
+2016-03-22    0.032987
+2016-03-09    0.033090
+2016-03-08    0.033296
+2016-03-30    0.033687
+2016-04-01    0.033687
+2016-03-29    0.034099
+2016-03-15    0.034284
+2016-03-19    0.034778
+2016-03-28    0.034860
+2016-04-02    0.035478
+2016-03-07    0.036014
+2016-04-04    0.036487
+2016-03-14    0.036549
+2016-03-12    0.036920
+2016-03-21    0.037373
+2016-03-20    0.037887
+2016-04-03    0.038608
+Name: date_crawled, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It appears that the site was crawled daily over roughly a one month period between March and April 2016. The distribution of listings crawled on each day is roughly uniform.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;last_seen&#39;</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2016-03-05    0.001071
+2016-03-06    0.004324
+2016-03-07    0.005395
+2016-03-08    0.007413
+2016-03-09    0.009595
+2016-03-10    0.010666
+2016-03-11    0.012375
+2016-03-12    0.023783
+2016-03-13    0.008895
+2016-03-14    0.012602
+2016-03-15    0.015876
+2016-03-16    0.016452
+2016-03-17    0.028086
+2016-03-18    0.007351
+2016-03-19    0.015834
+2016-03-20    0.020653
+2016-03-21    0.020632
+2016-03-22    0.021373
+2016-03-23    0.018532
+2016-03-24    0.019767
+2016-03-25    0.019211
+2016-03-26    0.016802
+2016-03-27    0.015649
+2016-03-28    0.020859
+2016-03-29    0.022341
+2016-03-30    0.024771
+2016-03-31    0.023783
+2016-04-01    0.022794
+2016-04-02    0.024915
+2016-04-03    0.025203
+2016-04-04    0.024483
+2016-04-05    0.124761
+2016-04-06    0.221806
+2016-04-07    0.131947
+Name: last_seen, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The crawler recorded the date it last saw any listing, which allows us to determine on what day a listing was removed, presumably because the car was sold.</p>
+<p>The last three days contain a disproportionate amount of 'last seen' values. Given that these are 6-10x the values from the previous days, it's unlikely that there was a massive spike in sales, and more likely that these values are to do with the crawling period ending and don't indicate car sales.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;ad_created&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="p">(</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;ad_created&#39;</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+        <span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(76,)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2015-06-11    0.000021
+2015-08-10    0.000021
+2015-09-09    0.000021
+2015-11-10    0.000021
+2015-12-05    0.000021
+2015-12-30    0.000021
+2016-01-03    0.000021
+2016-01-07    0.000021
+2016-01-10    0.000041
+2016-01-13    0.000021
+2016-01-14    0.000021
+2016-01-16    0.000021
+2016-01-22    0.000021
+2016-01-27    0.000062
+2016-01-29    0.000021
+2016-02-01    0.000021
+2016-02-02    0.000041
+2016-02-05    0.000041
+2016-02-07    0.000021
+2016-02-08    0.000021
+2016-02-09    0.000021
+2016-02-11    0.000021
+2016-02-12    0.000041
+2016-02-14    0.000041
+2016-02-16    0.000021
+2016-02-17    0.000021
+2016-02-18    0.000041
+2016-02-19    0.000062
+2016-02-20    0.000041
+2016-02-21    0.000062
+                ...   
+2016-03-09    0.033151
+2016-03-10    0.031895
+2016-03-11    0.032904
+2016-03-12    0.036755
+2016-03-13    0.017008
+2016-03-14    0.035190
+2016-03-15    0.034016
+2016-03-16    0.030125
+2016-03-17    0.031278
+2016-03-18    0.013590
+2016-03-19    0.033687
+2016-03-20    0.037949
+2016-03-21    0.037579
+2016-03-22    0.032801
+2016-03-23    0.032060
+2016-03-24    0.029280
+2016-03-25    0.031751
+2016-03-26    0.032266
+2016-03-27    0.030989
+2016-03-28    0.034984
+2016-03-29    0.034037
+2016-03-30    0.033501
+2016-03-31    0.031875
+2016-04-01    0.033687
+2016-04-02    0.035149
+2016-04-03    0.038855
+2016-04-04    0.036858
+2016-04-05    0.011819
+2016-04-06    0.003253
+2016-04-07    0.001256
+Name: ad_created, Length: 76, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There is a large variety of ad created dates. Most fall within 1-2 months of the listing date, but a few are quite old, with the oldest at around 9 months.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;registration_year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>count    48565.000000
+mean      2004.755421
+std         88.643887
+min       1000.000000
+25%       1999.000000
+50%       2004.000000
+75%       2008.000000
+max       9999.000000
+Name: registration_year, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The year the the car was first registered will likely indicate the age of the car. Looking at this column, we note some odd values. The minimum values is 1000, long before cars were invented and the maximum is 9999, many years into the future.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Dealing-with-incorrect-registration-year-data">Dealing with incorrect registration year data<a class="anchor-link" href="#Dealing-with-incorrect-registration-year-data">&#182;</a></h2><p>Because a car can't be first registered after the listing was seen, any vehicle with a registration year above 2016 is definitely inaccurate. Determining the earliest valid year is more difficult. Realistically, it could be somewhere in the first few decades of the 1900s.</p>
+<p>We'll count the number of listings with cars that fall outside the 1900-2016 interval and see if it's same to remove those rows entirely, or if we need more custom logic. First, we'll determine the percentage of our data that has invalid values.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="o">~</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;registration_year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span><span class="mi">2016</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">autos</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.038793369710697</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Given that this is less than 4% of our data, we will remove these rows.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span> <span class="o">=</span> <span class="n">autos</span><span class="p">[</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;registration_year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span><span class="mi">2016</span><span class="p">)]</span>
+<span class="n">autos</span><span class="p">[</span><span class="s1">&#39;registration_year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2000    0.067608
+2005    0.062895
+1999    0.062060
+2004    0.057904
+2003    0.057818
+2006    0.057197
+2001    0.056468
+2002    0.053255
+1998    0.050620
+2007    0.048778
+Name: registration_year, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It appears that most of the vehicles are now first registered in the past 20 years.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exploring-price-by-brand">Exploring price by brand<a class="anchor-link" href="#Exploring-price-by-brand">&#182;</a></h2><p>When working with data on cars, it's natural to explore variations across different car brands. We can use aggregation to understand the <code>brand</code> column.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;brand&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[23]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>volkswagen        0.211264
+bmw               0.110045
+opel              0.107581
+mercedes_benz     0.096463
+audi              0.086566
+ford              0.069900
+renault           0.047150
+peugeot           0.029841
+fiat              0.025642
+seat              0.018273
+skoda             0.016409
+nissan            0.015274
+mazda             0.015188
+smart             0.014160
+citroen           0.014010
+toyota            0.012703
+hyundai           0.010025
+sonstige_autos    0.009811
+volvo             0.009147
+mini              0.008762
+mitsubishi        0.008226
+honda             0.007840
+kia               0.007069
+alfa_romeo        0.006641
+porsche           0.006127
+suzuki            0.005934
+chevrolet         0.005698
+chrysler          0.003513
+dacia             0.002635
+daihatsu          0.002506
+jeep              0.002271
+subaru            0.002142
+land_rover        0.002099
+saab              0.001649
+jaguar            0.001564
+daewoo            0.001500
+trabant           0.001392
+rover             0.001328
+lancia            0.001071
+lada              0.000578
+Name: brand, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>German manufacturers represent four out of the top five brands, almost 50% of the overall listings. Volkswagen is by far the most popular brand, with approximately double the cars for sale of the next two brands combined.</p>
+<p>There are lots of brands that don't have a significant percentage of listings, so we will limit our analysis to brands representing more than 5% of total listings.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">brand_counts</span> <span class="o">=</span> <span class="n">autos</span><span class="p">[</span><span class="s1">&#39;brand&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">common_brands</span> <span class="o">=</span> <span class="n">brand_counts</span><span class="p">[</span><span class="n">brand_counts</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+<span class="n">common_brands</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[24]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Index([&#39;volkswagen&#39;, &#39;bmw&#39;, &#39;opel&#39;, &#39;mercedes_benz&#39;, &#39;audi&#39;, &#39;ford&#39;], dtype=&#39;object&#39;)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">brand_mean_prices</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">brand</span> <span class="ow">in</span> <span class="n">common_brands</span><span class="p">:</span>
+    <span class="n">brand_only</span> <span class="o">=</span> <span class="n">autos</span><span class="p">[</span><span class="n">autos</span><span class="p">[</span><span class="s1">&#39;brand&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">brand</span><span class="p">]</span>
+    <span class="n">mean_price</span> <span class="o">=</span> <span class="n">brand_only</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">brand_mean_prices</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">mean_price</span><span class="p">)</span>
+    
+<span class="n">brand_mean_prices</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[25]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;volkswagen&#39;: 5402,
+ &#39;bmw&#39;: 8332,
+ &#39;opel&#39;: 2975,
+ &#39;mercedes_benz&#39;: 8628,
+ &#39;audi&#39;: 9336,
+ &#39;ford&#39;: 3749}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Of the top 5 brands, there is a distinct price gap:</p>
+<ul>
+<li>Audi, BMW and Mercedes Benz are more expensive</li>
+<li>Ford and Opel are less expensive</li>
+<li>Volkswagen is in between – this may explain its popularity</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Storing-aggregate-data-in-a-dataframe">Storing aggregate data in a dataframe<a class="anchor-link" href="#Storing-aggregate-data-in-a-dataframe">&#182;</a></h2><p>From the top 6 brands, let's use aggregation to understand the average mileage for those cars and if there's any visible link with mean price. While our natural instinct may be to display both aggregated series objects and visually compare them, this has a few limitations:</p>
+<ul>
+<li>it's difficult to compare more than two aggregate series objects if we want to extend more columns</li>
+<li>we can't compare more than a few rows from each series object</li>
+<li>we can only sort by the index (brand name) of both series objects so we can easily make visual comparisons</li>
+</ul>
+<p>Instead, we can combine the data from both series objects into a single dataframe (with a shared index) and display the dataframe directly. To do this, we'll sue the pandas series constructor and the pandas dataframe constructor.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bmp_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">brand_mean_prices</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bmp_series</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mean_price&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[26]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>volkswagen</th>
+      <td>5402</td>
+    </tr>
+    <tr>
+      <th>bmw</th>
+      <td>8332</td>
+    </tr>
+    <tr>
+      <th>opel</th>
+      <td>2975</td>
+    </tr>
+    <tr>
+      <th>mercedes_benz</th>
+      <td>8628</td>
+    </tr>
+    <tr>
+      <th>audi</th>
+      <td>9336</td>
+    </tr>
+    <tr>
+      <th>ford</th>
+      <td>3749</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">brand_mean_mileage</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">brand</span> <span class="ow">in</span> <span class="n">common_brands</span><span class="p">:</span>
+    <span class="n">brand_only</span> <span class="o">=</span> <span class="n">autos</span><span class="p">[</span><span class="n">autos</span><span class="p">[</span><span class="s2">&quot;brand&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">brand</span><span class="p">]</span>
+    <span class="n">mean_mileage</span> <span class="o">=</span> <span class="n">brand_only</span><span class="p">[</span><span class="s2">&quot;odometer_km&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">brand_mean_mileage</span><span class="p">[</span><span class="n">brand</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">mean_mileage</span><span class="p">)</span>
+
+<span class="n">mean_mileage</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">brand_mean_mileage</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">mean_prices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">brand_mean_prices</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">brand_info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mean_mileage</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mean_mileage&#39;</span><span class="p">])</span>
+<span class="n">brand_info</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[28]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_mileage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bmw</th>
+      <td>132572</td>
+    </tr>
+    <tr>
+      <th>mercedes_benz</th>
+      <td>130788</td>
+    </tr>
+    <tr>
+      <th>opel</th>
+      <td>129310</td>
+    </tr>
+    <tr>
+      <th>audi</th>
+      <td>129157</td>
+    </tr>
+    <tr>
+      <th>volkswagen</th>
+      <td>128707</td>
+    </tr>
+    <tr>
+      <th>ford</th>
+      <td>124266</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">brand_info</span><span class="p">[</span><span class="s1">&#39;mean_price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_prices</span>
+<span class="n">brand_info</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[29]:</div>
+
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_mileage</th>
+      <th>mean_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bmw</th>
+      <td>132572</td>
+      <td>8332</td>
+    </tr>
+    <tr>
+      <th>mercedes_benz</th>
+      <td>130788</td>
+      <td>8628</td>
+    </tr>
+    <tr>
+      <th>opel</th>
+      <td>129310</td>
+      <td>2975</td>
+    </tr>
+    <tr>
+      <th>audi</th>
+      <td>129157</td>
+      <td>9336</td>
+    </tr>
+    <tr>
+      <th>volkswagen</th>
+      <td>128707</td>
+      <td>5402</td>
+    </tr>
+    <tr>
+      <th>ford</th>
+      <td>124266</td>
+      <td>3749</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The range of car mileages does not vary as much as the prices do by brand, instead all falling within 10% for the top brands. There is a slight trend to the more expensive vehicles having higher mileage,with the less expensive vehicles having lower mileage.</p>
+
+</div>
+</div>
+</div>
+ 
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+    </article>
+
+    <hr>
+
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="https://github.com/json-lou">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/jaysonlou/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+			<li>
+			    <a href="http://www.jaysonlou.com/">
+				<span class="fa-stack fa-lg">
+				    <i class="fa fa-circle fa-stack-2x"></i>
+				    <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+				</span>
+			    </a>
+			</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://json-lou.github.io/theme/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://json-lou.github.io/theme/js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="https://json-lou.github.io/theme/js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
